@@ -1,3 +1,4 @@
+#include "llist.h"
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
@@ -6,24 +7,24 @@
 int main(int argc, const char *argv[]) {
   int i;
   struct node *head=NULL;
-  for(i=0; a<argc; i++){
-    if(argv[i].equals("ih"){
+  for(i=0; i<argc; i++){
+    if(strcmp(argv[i], "ih")==0){
       struct node *n = node_alloc(atoi(argv[i+1]));
       llist_insert_head(&head, n);
       i++;
     }
-    if(argv[i].equals("it"){
+    if(strcmp(argv[i], "it")==0){
       struct node *n = node_alloc(atoi(argv[i+1]));
       llist_insert_tail(&head, n);
       i++;
     }
-    if(argv[i].equals("dh"){
+    if(strcmp(argv[i], "dh")==0){
       llist_delete_head(&head);
     }
-    if(argv[i].equals("f"){
-      llist_free(head);
+    if(strcmp(argv[i], "f")==0){
+      llist_free(&head);
     }
-    if(argv[i].equals("p"){
+    if(strcmp(argv[i], "p")==0){
       llist_print(head);
     }
   }
@@ -50,9 +51,10 @@ void llist_free(struct node **head){
 }
 
 struct node *node_alloc(int value){
-  
+  struct node *n={value, NULL};
+  return n;
 }
 
-void node_free(struct node *n){
-
+void node_free(struct node *n){ 
+  free(n);
 }
